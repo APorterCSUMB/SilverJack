@@ -1,6 +1,7 @@
 <?php
     
-    echo '<!DOCTYPE HTML><html><head><title>SilverJack</title></head><body>';
+    echo '<!DOCTYPE HTML><html><head><title>SilverJack</title>
+    <link rel="stylesheet" href="style.css"></head><body>';
 
     $cards = array();
     $cards[] = array('id' => 0, 'type' => "club", 'val' => 1);
@@ -74,7 +75,7 @@
     for($i=0; $i<4;$i++){
         $hands[$i] = array();
         $hands[$i]['player'] = $players[$i];
-        $hands[$i]['size'] = rand(4,6);
+        $hands[$i]['size'] = floor(sqrt(rand(4,6)*rand(4,6)));
         $hands[$i]['cards'] = array();
         $index = 0;
         while($index<$hands[$i]['size']){
@@ -88,10 +89,23 @@
     }
     
     foreach($hands as $hand){
-        print_r($hand);
-        echo '<br>';
+        echo '
+        <div class="seat">
+        <div class="player">
+        '.$hand['player']['name'].'
+        </div>
+        <div class="hand">
+        ';
+        foreach($hand['cards'] as $cardID){
+            foreach($cards as $card){
+                if($card['id']==$cardID){
+                    echo '<img src="cards/'.$card['type'].'s/'.$card['val'].'.png">';
+                }
+            }
+        }
+        echo '</div><div class="score">'.$hand['score'].'</div></div><br>';
     }
-    
+    /*
     foreach($cards as $card){
         echo '
             <div>
@@ -138,6 +152,7 @@
     echo '<br>';
     echo '<br>';
     echo '<br>';
+    */
     echo '</body></html>';
     
 ?>
