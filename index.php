@@ -31,7 +31,7 @@
     $cards[] = array('id' => 25, 'type' => "diamond", 'val' => 13);
     $cards[] = array('id' => 26, 'type' => "heart", 'val' => 1);
     $cards[] = array('id' => 27, 'type' => "heart", 'val' => 2);
-    $cards[] = array('id' => 28, 'type' => "hearts", 'val' => 3);
+    $cards[] = array('id' => 28, 'type' => "heart", 'val' => 3);
     $cards[] = array('id' => 29, 'type' => "heart", 'val' => 4);
     $cards[] = array('id' => 30, 'type' => "heart", 'val' => 5);
     $cards[] = array('id' => 31, 'type' => "heart", 'val' => 6);
@@ -54,8 +54,77 @@
     $cards[] = array('id' => 48, 'type' => "spade", 'val' => 10);
     $cards[] = array('id' => 49, 'type' => "spade", 'val' => 11);
     $cards[] = array('id' => 50, 'type' => "spade", 'val' => 12);
-    $cards[] = array('id' => 21, 'type' => "spade", 'val' => 13);
-   
+    $cards[] = array('id' => 51, 'type' => "spade", 'val' => 13);
+    
+    $players = array();
+    $players[] = array('name' => "Alice", 'color' => "#bbbbbb");
+    $players[] = array('name' => "Bobby", 'color' => "#cccccc");
+    $players[] = array('name' => "Charlie", 'color' => "#dddddd");
+    $players[] = array('name' => "Danny", 'color' => "#eeeeee");
+    $players[] = array('name' => "Elaine", 'color' => "#ffffff");
+    
+    shuffle($players);
+    shuffle($cards);
+    
+    
+    
+    $hands = array();
+    $positionCd = 0;
+    $value = 0;
+    for($i=0; $i<4;$i++){
+        $hands[$i] = array();
+        $hands[$i]['player'] = $players[$i];
+        $hands[$i]['size'] = rand(4,6);
+        $hands[$i]['cards'] = array();
+        $index = 0;
+        while($index<$hands[$i]['size']){
+            $hands[$i]['cards'][$index] = $cards[$positionCd]['id']; 
+            $value += $cards[$positionCd]['val'];
+            $index++;
+            $positionCd++;
+        }
+        $hands[$i]['score'] = $value;
+        $value = 0;
+    }
+    
+    foreach($hands as $hand){
+        print_r($hand);
+        echo '<br>';
+    }
+    
+    foreach($cards as $card){
+        echo '
+            <div>
+            Card ID = ' . $card['id'] . '<br>
+            Card Type = ';
+            $typ = "";
+            switch($card['type']){
+                case "spade":
+                    $typ = 'Spade';
+                    break;
+                case "diamond":
+                    $typ = "Diamond";
+                    break;
+                case "club":
+                    $typ = "Club";
+                    break;
+                case "heart":
+                    $typ = "Heart";
+                    break;
+            }
+        echo $typ.'<br>';
+        echo '
+            Card Value: ' . $card['val'] . '<br>
+            <img src="cards/'.$card['type'].'s/'.$card['val'].'.png">
+            
+            
+            
+            <br><hr>
+        ';
+    }
+    
+    
+    
     echo '<br>';
     echo '<br>';
     print_r($cards);
