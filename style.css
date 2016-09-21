@@ -1,3 +1,12 @@
-.hand,.score,.player{
+.hand,.score,.player,.winner{
     display: inline-block;
+}
+body{
+    background-color:brown;
+}
+.super{
+    background-color: green;
+}
+.seat{
+    margin:auto 0;
 }

@@ -1,7 +1,7 @@
 <?php
     
     echo '<!DOCTYPE HTML><html><head><title>SilverJack</title>
-    <link rel="stylesheet" href="style.css"></head><body>';
+    <link rel="stylesheet" href="style.css"></head><body><div class="super">';
 
     $cards = array();
     $cards[] = array('id' => 0, 'type' => "club", 'val' => 1);
@@ -72,10 +72,11 @@
     $hands = array();
     $positionCd = 0;
     $value = 0;
+    $winning = 0;
     for($i=0; $i<4;$i++){
         $hands[$i] = array();
         $hands[$i]['player'] = $players[$i];
-        $hands[$i]['size'] = floor(sqrt(rand(4,6)*rand(4,6)));
+        $hands[$i]['size'] = rand(4,6);
         $hands[$i]['cards'] = array();
         $index = 0;
         while($index<$hands[$i]['size']){
@@ -85,25 +86,34 @@
             $positionCd++;
         }
         $hands[$i]['score'] = $value;
+        if(($value>$winning) && ($value<=42)){
+            $winning = $value;
+        }
         $value = 0;
     }
     
     foreach($hands as $hand){
         echo '
         <div class="seat">
-        <div class="player">
-        '.$hand['player']['name'].'
-        </div>
-        <div class="hand">
-        ';
-        foreach($hand['cards'] as $cardID){
-            foreach($cards as $card){
-                if($card['id']==$cardID){
-                    echo '<img src="cards/'.$card['type'].'s/'.$card['val'].'.png">';
+            <div class="player">
+                '.$hand['player']['name'].'
+            </div>
+            <div class="hand">';
+                foreach($hand['cards'] as $cardID){
+                    foreach($cards as $card){
+                        if($card['id']==$cardID){
+                            echo '<img src="cards/'.$card['type'].'s/'.$card['val'].'.png">';
+                        }
+                    }
                 }
+            echo '
+            </div>
+            <div class="score">'.$hand['score'].'
+            </div>';
+            if($hand['score']==$winning){
+                echo '<div class="winner">Winner!</div>';
             }
-        }
-        echo '</div><div class="score">'.$hand['score'].'</div></div><br>';
+        echo '</div><br>';
     }
     /*
     foreach($cards as $card){
@@ -153,6 +163,6 @@
     echo '<br>';
     echo '<br>';
     */
-    echo '</body></html>';
+    echo '</div></body></html>';
     
 ?>
