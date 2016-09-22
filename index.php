@@ -96,7 +96,7 @@
         echo '
         <div class="seat">
             <div class="player">
-                '.$hand['player']['name'].'
+                <img src="players/'.$hand['player']['name'].'.jpg">
             </div>
             <div class="hand">';
                 foreach($hand['cards'] as $cardID){
@@ -106,63 +106,23 @@
                         }
                     }
                 }
+                for($i=0;$i<(6-$hand['size']);$i++){
+                    echo '<img src="cards/card_back.png">';
+                }
             echo '
             </div>
             <div class="score">'.$hand['score'].'
-            </div>';
+            </div>
+            <div class="winner">';
             if($hand['score']==$winning){
-                echo '<div class="winner">Winner!</div>';
+                echo 'Winner!';
             }
-        echo '</div><br>';
-    }
-    /*
-    foreach($cards as $card){
-        echo '
-            <div>
-            Card ID = ' . $card['id'] . '<br>
-            Card Type = ';
-            $typ = "";
-            switch($card['type']){
-                case "spade":
-                    $typ = 'Spade';
-                    break;
-                case "diamond":
-                    $typ = "Diamond";
-                    break;
-                case "club":
-                    $typ = "Club";
-                    break;
-                case "heart":
-                    $typ = "Heart";
-                    break;
+            else{
+                echo 'Loser...';
             }
-        echo $typ.'<br>';
-        echo '
-            Card Value: ' . $card['val'] . '<br>
-            <img src="cards/'.$card['type'].'s/'.$card['val'].'.png">
-            
-            
-            
-            <br><hr>
-        ';
+            echo '</div>
+        </div>';
     }
-    
-    
-    
-    echo '<br>';
-    echo '<br>';
-    print_r($cards);
-    
-    echo '<br>';
-    echo '<br>';
-    echo '<br>';
-    $shuf = $cards;
-    shuffle($shuf);
-    print_r($shuf);
-    echo '<br>';
-    echo '<br>';
-    echo '<br>';
-    */
     echo '</div></body></html>';
     
 ?>
