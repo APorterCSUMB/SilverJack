@@ -1,7 +1,10 @@
 <?php
     $values = 13;
     $suits = 4;
-    $players = ["p0"=> array(),"p1"=> array(),"p2"=> array(),"p3"=> array()];
+    $players = ["p0"=> array("name"=>"1","win"=>"loser","hand"=>array()),
+                "p1"=> array("name"=>"2","win"=>"loser","hand"=>array()),
+                "p2"=> array("name"=>"3","win"=>"loser","hand"=>array()),
+                "p3"=> array("name"=>"4","win"=>"loser","hand"=>array())];
     $deck = array();
     $curCard = 0;
     
@@ -33,14 +36,37 @@
     function deal(){
         global $deck, $players;
         for($i=0;$i<count($players);$i++){
-            //if player can draw card
-            //if()
-            array_push($players["p".$i], pop());
+            $draw = rand(4,6);
+            for($j=0;$j<$draw;$j++){
+                array_push($players["p".$i]['hand'], pop());
+            }
+        }
+    }
+    
+    function playerEval(){
+        global $players;
+        $best = 0;
+        for($i=0;$i<count($players);$i++){
+            $tot = 0;
+            for($j=0;$j<count($players["p".$i]['hand']);$j++){
+                $tot = $players["p".$i]['hand'][$j]['value'];
+            }
+            
         }
     }
     
     $deck = makeDeck();
     shuffleDeck();
     deal();
-    var_dump($players);
+    shuffle($players);
+    
+    for($i=0;$i<count($players);$i++){
+        echo '
+        <div class="playerblock">
+        <div class="portrait"> </div>';
+        echo "<br>";
+    }
+    //var_dump($players);
+    
+    
 ?>
