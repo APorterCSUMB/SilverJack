@@ -6,7 +6,7 @@
 .player img{
     width:96px;
     height:96px;
-    border:0px solid;
+    border:5px solid;
     border-radius:5%;
 }
 .hand{

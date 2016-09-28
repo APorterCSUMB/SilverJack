@@ -59,11 +59,11 @@
     
     function getPlayers($number){
         $player = array();
-        $player[] = array('name' => "Alice", 'color' => "#bbbbbb");
-        $player[] = array('name' => "Bobby", 'color' => "#cccccc");
-        $player[] = array('name' => "Charlie", 'color' => "#dddddd");
-        $player[] = array('name' => "Danny", 'color' => "#eeeeee");
-        $player[] = array('name' => "Elaine", 'color' => "#ffffff");
+        $player[] = array('name' => "Alice", 'color' => "#ab16fd");
+        $player[] = array('name' => "Bobby", 'color' => "#d71c3a");
+        $player[] = array('name' => "Charlie", 'color' => "#9f1b45");
+        $player[] = array('name' => "Danny", 'color' => "#a18e33");
+        $player[] = array('name' => "Elaine", 'color' => "#91ba4d");
         shuffle($player);
         $players = array();
         if($number>5){$number=5;}
@@ -108,7 +108,7 @@
             echo '
             <div class="seat">
                 <div class="player">
-                    <img src="players/'.$hand['player']['name'].'.jpg">
+                    <img src="players/'.$hand['player']['name'].'.jpg" style="border-color:'.$hand['player']['color'].'">
                 </div>
                 <div class="hand">';
                     foreach($hand['cards'] as $cardID){
